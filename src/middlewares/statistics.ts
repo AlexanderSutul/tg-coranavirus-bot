@@ -49,7 +49,7 @@ const getTotalRecovered = async () => {
     return response.features[0].attributes.value;
 };
 
-const getStatisticsByCountries = async (): Promise<IStatistics[]> => {
+export const getStatisticsByCountries = async (): Promise<IStatistics[]> => {
     const url = Config.getByCountriesUrl();
     const req = new RequestsService();
     const response = await req.get(url);
