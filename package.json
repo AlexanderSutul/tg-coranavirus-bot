@@ -1,0 +1,19 @@
+{
+  "name": "tg_bot_virus",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon --watch 'src/**/*.ts' --ext ts --exec \"ts-node src/app.ts\""
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "concurrently": "^2.2.0",
+    "nodemon": "^1.9.2",
+    "telegraf": "^3.36.0",
+    "ts-node": "^8.6.2",
+    "ts-watch": "^1.0.8",
+    "tslint": "^6.0.0",
+    "typescript": "^3.7.5"
+  }
+}
