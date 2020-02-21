@@ -7,10 +7,19 @@ export class StatisticService {
     memorizedStat: IStatistics[] = [];
     lastStatRequest: number = Date.now();
 
+    updateLastStatRequest() {
+        this.lastStatRequest = Date.now();
+    }
+
+    updateMemorizedStat(stats: IStatistics[]) {
+        this.memorizedStat = stats;
+    }
+
     getTotalConfirmed = async () => {
         const url = ConfigService.getTotalConfirmedUrl();
         const response = await axios.get(url);
         const data = response.data;
+        this.updateLastStatRequest();
         return data.features[0].attributes.value;
     };
 
@@ -18,6 +27,7 @@ export class StatisticService {
         const url = ConfigService.getTotalDeathUrl();
         const req = new RequestsService();
         const response = await req.get(url);
+        this.updateLastStatRequest();
         return response.features[0].attributes.value;
     };
 
@@ -25,14 +35,21 @@ export class StatisticService {
         const url = ConfigService.getTotalRecoveredUrl();
         const req = new RequestsService();
         const response = await req.get(url);
+        this.updateLastStatRequest();
         return response.features[0].attributes.value;
     };
 
     getStatisticsByCountries = async (): Promise<IStatistics[]> => {
+
+        if (this.memorizedStat.length) {
+            return this.memorizedStat;
+        }
         const url = ConfigService.getByCountriesUrl();
         const req = new RequestsService();
         const response = await req.get(url);
         this.memorizedStat = response.features;
+        this.updateLastStatRequest();
+        this.updateMemorizedStat(response.features);
         return response.features as IStatistics[];
     };
 
