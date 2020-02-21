@@ -1,6 +1,6 @@
-import {Config} from "./config";
+import {ConfigService} from "./config.service";
 import axios from "axios";
-import {RequestsService} from "./requests";
+import {RequestsService} from "./requests.service";
 
 export class StatisticService {
 
@@ -8,28 +8,28 @@ export class StatisticService {
     lastStatRequest: number = Date.now();
 
     getTotalConfirmed = async () => {
-        const url = Config.getTotalConfirmedUrl();
+        const url = ConfigService.getTotalConfirmedUrl();
         const response = await axios.get(url);
         const data = response.data;
         return data.features[0].attributes.value;
     };
 
     getTotalDeath = async () => {
-        const url = Config.getTotalDeathUrl();
+        const url = ConfigService.getTotalDeathUrl();
         const req = new RequestsService();
         const response = await req.get(url);
         return response.features[0].attributes.value;
     };
 
     getTotalRecovered = async () => {
-        const url = Config.getTotalRecoveredUrl();
+        const url = ConfigService.getTotalRecoveredUrl();
         const req = new RequestsService();
         const response = await req.get(url);
         return response.features[0].attributes.value;
     };
 
     getStatisticsByCountries = async (): Promise<IStatistics[]> => {
-        const url = Config.getByCountriesUrl();
+        const url = ConfigService.getByCountriesUrl();
         const req = new RequestsService();
         const response = await req.get(url);
         this.memorizedStat = response.features;

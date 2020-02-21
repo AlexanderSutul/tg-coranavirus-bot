@@ -1,5 +1,5 @@
 import {ContextMessageUpdate} from "telegraf";
-import {IStatistics, statisticService} from "../services/statistic";
+import {IStatistics, statisticService} from "../services/statistic.service";
 const chartExporter = require("highcharts-export-server");
 
 export const chartMiddleware = async (ctx: ContextMessageUpdate) => {

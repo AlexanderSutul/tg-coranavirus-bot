@@ -1,8 +1,8 @@
 import {ContextMessageUpdate} from "telegraf";
 import axios from 'axios';
-import {RequestsService} from "../services/requests";
-import {Config} from "../services/config";
-import {statisticService} from "../services/statistic";
+import {RequestsService} from "../services/requests.service";
+import {ConfigService} from "../services/config.service";
+import {statisticService} from "../services/statistic.service";
 
 export const statisticsMiddleware = async (ctx: ContextMessageUpdate) => {
 
