@@ -4,8 +4,11 @@ import {RequestsService} from "../services/requests.service";
 import {ConfigService} from "../services/config.service";
 import {statisticService} from "../services/statistic.service";
 
-export const statisticsMiddleware = async (ctx: ContextMessageUpdate) => {
+const formatNumber = (num: number, locale: string = 'de-DE'): string => {
+    return new Intl.NumberFormat(locale).format(num)
+}
 
+export const statisticsMiddleware = async (ctx: ContextMessageUpdate) => {
     const {
         getTotalConfirmed,
         getTotalDeath,
@@ -17,19 +20,26 @@ export const statisticsMiddleware = async (ctx: ContextMessageUpdate) => {
     const [totalConfirmed, totalDeath, totalRecovered, statisticsByCountries] = await Promise.all([
         getTotalConfirmed(), getTotalDeath(), getTotalRecovered(), getStatisticsByCountries()
     ]);
-
-    let replyText: string = '';
-    replyText += `Total confirmed️️☢️: ${totalConfirmed}\n`;
-    replyText += `Total died⚰️: ${totalDeath}\n`;
-    replyText += `Total recovered💚: ${totalRecovered}\n`;
-
     const stats = statisticsByCountriesOrginize(statisticsByCountries);
 
+    let replyText: string = '';
+    replyText += `Total confirmed️️☢️: ${formatNumber(totalConfirmed)}\n`;
+    replyText += `Total died⚰️: ${formatNumber(totalDeath)}\n`;
+    replyText += `Total recovered💚: ${formatNumber(totalRecovered)}\n`;
     replyText += `Statistics by countries:\n`;
 
-    stats.forEach(stat => {
-       replyText += `${stat.idx + 1}. ${stat.region} ☢️: ${stat.confirmed} ⚰️: ${stat.death} 💚: ${stat.recovered}\n`
-    });
+    for (const stat of stats) {
+        replyText += `${formatNumber(stat.idx)}. `
+            + `${stat.region}`
+            + ` ☢️: ${formatNumber(stat.confirmed)}`
+            + ` ⚰️: ${formatNumber(stat.death)}`
+            + ` 💚: ${formatNumber(stat.recovered)}`
+            + `\n`;
+        if (stat.idx % 50 === 0) {
+            await ctx.reply(replyText);
+            replyText = '';
+        }
+    }
 
     await ctx.reply(replyText);
 };

@@ -1,7 +1,15 @@
 import Telegraf from "telegraf";
 import {aboutMiddleware, chartMiddleware, startMiddleware, statisticsMiddleware} from "./middlewares/middlewares";
+import {config} from 'dotenv';
 
-const token = `1073229717:AAHo8XD6AWXpR561YW3Gc-o8cGKum8LN_Iw`;
+config();
+
+const token = process.env.TG_TOKEN;
+
+if (!token) {
+    throw new Error('There is no token');
+}
+
 const bot = new Telegraf(token);
 console.log('App runs...');
 try {

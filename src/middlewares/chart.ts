@@ -5,12 +5,7 @@ const chartExporter = require("highcharts-export-server");
 export const chartMiddleware = async (ctx: ContextMessageUpdate) => {
     chartExporter.initPool();
 
-    let stats: IStatistics[];
-    if (statisticService.memorizedStat.length) {
-        stats = statisticService.memorizedStat;
-    } else {
-        stats = await statisticService.getStatisticsByCountries();
-    }
+    const stats = await statisticService.getStatisticsByCountries();
 
     const chinaStat = stats.find(stat => stat.attributes.Country_Region === 'Mainland China');
     const chinaData = chinaStat && chinaStat.attributes.Confirmed;
