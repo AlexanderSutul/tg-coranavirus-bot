@@ -1,7 +1,4 @@
 import {ContextMessageUpdate} from "telegraf";
-import axios from 'axios';
-import {RequestsService} from "../services/requests.service";
-import {ConfigService} from "../services/config.service";
 import {statisticService} from "../services/statistic.service";
 
 const formatNumber = (num: number, locale: string = 'de-DE'): string => {
