@@ -1,6 +1,7 @@
 import {ConfigService} from "./config.service";
 import axios from "axios";
 import {RequestsService} from "./requests.service";
+import {Stat} from "../models/stat";
 
 export class StatisticService {
 
@@ -25,21 +26,22 @@ export class StatisticService {
         return response.features[0].attributes.value;
     };
 
-    getStatisticsByCountries = async (): Promise<IStatistics[]> => {
+    getStatisticsByCountries = async (): Promise<Stat[]> => {
         const url = ConfigService.getByCountriesUrl();
         const req = new RequestsService();
         const response = await req.get(url);
-        return response.features as IStatistics[];
-    };
+        const stats = response.features as IStatistics[];
+        return stats.map((statistics: IStatistics, index: number) => {
+            const stat = new Stat();
+            stat
+                .setIdx(index + 1)
+                .setRegion(statistics.attributes.Country_Region)
+                .setConfirmed(statistics.attributes.Confirmed)
+                .setDeath(statistics.attributes.Deaths)
+                .setRecovered(statistics.attributes.Recovered)
 
-    statisticsByCountriesOrginize = (stats: IStatistics[]): IStats[] => {
-        return stats.map((stat: IStatistics, index): IStats => ({
-            idx: index + 1,
-            region: stat.attributes.Country_Region,
-            confirmed: stat.attributes.Confirmed || 0,
-            death: stat.attributes.Deaths || 0,
-            recovered: stat.attributes.Recovered || 0,
-        }));
+            return stat;
+        })
     };
 }
 
@@ -56,7 +58,7 @@ export interface IStatistics {
     }
 }
 
-export interface IStats {
+export interface IStat {
     idx: number,
     region: string,
     confirmed: number,

@@ -10,6 +10,7 @@
     "strict": true,
     "rootDirs": ["./src"],
     "esModuleInterop": true,
-    "sourceMap": true,
+    "resolveJsonModule": true,
+    "sourceMap": true
   }
 }

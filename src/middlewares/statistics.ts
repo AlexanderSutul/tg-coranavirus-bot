@@ -1,9 +1,6 @@
 import {ContextMessageUpdate} from "telegraf";
 import {statisticService} from "../services/statistic.service";
-
-const formatNumber = (num: number, locale: string = 'de-DE'): string => {
-    return new Intl.NumberFormat(locale).format(num)
-}
+import {Statistics} from "../models/statistics";
 
 export const statisticsMiddleware = async (ctx: ContextMessageUpdate) => {
     const {
@@ -11,32 +8,21 @@ export const statisticsMiddleware = async (ctx: ContextMessageUpdate) => {
         getTotalDeath,
         getTotalRecovered,
         getStatisticsByCountries,
-        statisticsByCountriesOrginize
     } = statisticService;
 
-    const [totalConfirmed, totalDeath, totalRecovered, statisticsByCountries] = await Promise.all([
+    const [
+        totalConfirmed, totalDeath, totalRecovered, statisticsByCountries
+    ] = await Promise.all([
         getTotalConfirmed(), getTotalDeath(), getTotalRecovered(), getStatisticsByCountries()
     ]);
-    const stats = statisticsByCountriesOrginize(statisticsByCountries);
 
-    let replyText: string = '';
-    replyText += `Total confirmed️️☢️: ${formatNumber(totalConfirmed)}\n`;
-    replyText += `Total died⚰️: ${formatNumber(totalDeath)}\n`;
-    replyText += `Total recovered💚: ${formatNumber(totalRecovered)}\n`;
-    replyText += `Statistics by countries:\n`;
+    const statistics = new Statistics(
+        statisticsByCountries, totalConfirmed, totalDeath, totalRecovered
+    );
 
-    for (const stat of stats) {
-        replyText += `${formatNumber(stat.idx)}. `
-            + `${stat.region}`
-            + ` ☢️: ${formatNumber(stat.confirmed)}`
-            + ` ⚰️: ${formatNumber(stat.death)}`
-            + ` 💚: ${formatNumber(stat.recovered)}`
-            + `\n`;
-        if (stat.idx % 50 === 0) {
-            await ctx.reply(replyText);
-            replyText = '';
-        }
-    }
+    const report = statistics.getReport();
 
-    await ctx.reply(replyText);
+    const slicedReportParts = Statistics.useSlicer(report);
+
+    for (const part of slicedReportParts) await ctx.reply(part, { parse_mode: 'HTML' });
 };
