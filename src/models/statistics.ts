@@ -27,7 +27,6 @@ export class Statistics {
 
     private generateBody() {
         let body = '';
-
         for (const stat of this.stats) {
             body += `${formatNumber(stat.idx)}. `
                 + `${stat.region}`
@@ -37,7 +36,6 @@ export class Statistics {
                 + `\n`;
 
         }
-
         return body;
     }
 
