@@ -34,7 +34,6 @@ export class Statistics {
                 + ` ⚰️: ${formatNumber(stat.death)}`
                 + ` 💚: ${formatNumber(stat.recovered)}`
                 + `\n`;
-
         }
         return body;
     }
