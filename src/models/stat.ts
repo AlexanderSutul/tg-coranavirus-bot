@@ -60,16 +60,4 @@ export class Stat {
     get recovered(): number {
         return this._recovered;
     }
-
-    getFormattedRow(): string {
-        let row = '';
-        row += `${formatNumber(this.idx)}. `
-            + `${this.region}`
-            + ` ☢️: ${formatNumber(this.confirmed)}`
-            + ` ⚰️: ${formatNumber(this.death)}`
-            + ` 💚: ${formatNumber(this.recovered)}`
-            + `\n`;
-
-        return row;
-    }
 }
