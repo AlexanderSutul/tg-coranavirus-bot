@@ -1,6 +1,7 @@
 import Telegraf from "telegraf";
 import {aboutMiddleware, chartMiddleware, startMiddleware, statisticsMiddleware} from "./middlewares/middlewares";
 import {config} from 'dotenv';
+import {actionHandler} from "./routes/actions/actions";
 
 config();
 
@@ -18,6 +19,9 @@ try {
         bot.hears('Statistics', statisticsMiddleware);
         bot.hears('Chart', chartMiddleware);
         bot.hears('About', aboutMiddleware);
+
+        actionHandler(bot);
+
         await bot.startPolling();
         console.log('App launched');
     })();
