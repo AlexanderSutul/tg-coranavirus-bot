@@ -334,7 +334,7 @@
         "signature": "40afde5fa43308c1877a058aa46cfa9f25026b73912ef71eb9e80a36ebdab5e4"
       },
       "./src/helper/helper.ts": {
-        "version": "1dc8b1d15e39af2010c085272e6e7438046c31fffeee1e785ca9c5569d023384",
+        "version": "57430f3d4e4c68d50dc081e3b2ef605bdbabcc187fa8c3b07416ee8aadffd71a",
         "signature": "92510af37611ccdfe6f4c1bbf3541b2947c61c96b1517c8385198e4b0bd0aa88"
       },
       "./src/models/statistics.ts": {
@@ -342,8 +342,8 @@
         "signature": "811624754c47e8ef88b44e7112b4c02e954dbc643dabbd52edb5e48827a46d03"
       },
       "./src/routes/actions/actions.ts": {
-        "version": "30f987447859f22fe7c4d315dd776708b97c3af5c23e5d661ce57041d3695558",
-        "signature": "1a58e696dea535a22aa5f001d8187b85fcaa15718afc6088e0df3fea8829c740"
+        "version": "46b95ebd75062f99edce4fbc97032a10b9c07e4cbf87ac7abc4881a81d9fcc4c",
+        "signature": "77f7886a146ada304cad9cacdd8340dbbaa60bb28697f4306c767637f1f075ae"
       },
       "./src/middlewares/statistics.ts": {
         "version": "dc6728f74a62a7a821600fc6078f60a98fdc3133fe72c01be29446b2af9d696e",
@@ -354,8 +354,8 @@
         "signature": "8139795eb58bb47a26910d6bb8bfb6c8ba740ba78566721e6b4dab2285bbb5e2"
       },
       "./src/middlewares/about.ts": {
-        "version": "9a8d76c7612a7576038b672a4c526fdf60128bd7ca538b02c7a7ea0b7950d831",
-        "signature": "9d348acc626d4e9eda4e4bc8024bdce0e57da93e8bca8a9de7748d4b1130fe7f"
+        "version": "e2749b611a5809a3a892d5f0b4cd0cdeb434aba2820c1f816478d085942ee55b",
+        "signature": "c64cb6abfaa2bbad0eab20649ba55a249be4103b4b2e0019b536a9be120208b6"
       },
       "./src/keyboard/menu.ts": {
         "version": "5288b6c0dbc4745d4657d496f2e2d9828a37e8c180db93db229147b2b4062e07",
@@ -1727,6 +1727,15 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.5/util.d.ts"
       ],
+      "./src/services/statistic.service.ts": [
+        "./src/models/stat.ts"
+      ],
+      "./src/models/statistics.ts": [
+        "./src/models/stat.ts"
+      ],
+      "./src/routes/actions/actions.ts": [
+        "./node_modules/telegraf/typings/index.d.ts"
+      ],
       "./src/middlewares/statistics.ts": [
         "./node_modules/telegraf/typings/index.d.ts"
       ],
@@ -1785,15 +1794,6 @@
         "./node_modules/@types/node/ts3.5/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.5/util.d.ts"
-      ],
-      "./src/models/statistics.ts": [
-        "./src/models/stat.ts"
-      ],
-      "./src/services/statistic.service.ts": [
-        "./src/models/stat.ts"
-      ],
-      "./src/routes/actions/actions.ts": [
-        "./node_modules/telegraf/typings/index.d.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -1878,25 +1878,25 @@
       "./src/services/config.service.ts",
       "./node_modules/axios/index.d.ts",
       "./src/services/requests.service.ts",
+      "./src/models/stat.ts",
+      "./src/services/statistic.service.ts",
+      "./src/models/statistics.ts",
+      "./src/middlewares/chart.ts",
+      "./src/keyboard/menu.ts",
+      "./src/middlewares/start.ts",
       "./node_modules/dotenv/types/index.d.ts",
+      "./src/enums/enums.ts",
+      "./src/routes/hears/hears.ts",
       "../node_modules/@types/is-stream/index.d.ts",
       "../node_modules/@types/p-queue/index.d.ts",
       "../node_modules/@types/retry/index.d.ts",
       "../node_modules/@types/ws/index.d.ts",
-      "./src/models/stat.ts",
-      "./src/models/statistics.ts",
-      "./src/middlewares/statistics.ts",
-      "./src/services/statistic.service.ts",
       "./src/helper/helper.ts",
       "./src/routes/actions/actions.ts",
-      "./src/app.ts",
-      "./src/middlewares/chart.ts",
+      "./src/middlewares/statistics.ts",
       "./src/middlewares/about.ts",
-      "./src/keyboard/menu.ts",
-      "./src/middlewares/start.ts",
-      "./src/enums/enums.ts",
-      "./src/routes/hears/hears.ts",
-      "./src/middlewares/middlewares.ts"
+      "./src/middlewares/middlewares.ts",
+      "./src/app.ts"
     ]
   },
   "version": "3.7.5"

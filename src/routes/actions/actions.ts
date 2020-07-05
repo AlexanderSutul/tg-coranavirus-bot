@@ -14,7 +14,7 @@ class ActionLikePandemic implements IAction {
   trigger: string = BotAction.LikePandemic.toString();
 
   async middleware(ctx: ContextMessageUpdate): Promise<void> {
-    await ctx.editMessageText('🎉 I love to be at home! 🎉');
+    await ctx.editMessageText('🎉 I like this output! 🎉');
   }
 }
 
@@ -22,7 +22,7 @@ class ActionDislikePandemic implements IAction {
   trigger: string = BotAction.DislikePandemic.toString();
 
   async middleware(ctx: ContextMessageUpdate): Promise<void> {
-    await ctx.editMessageText('We all will die!');
+    await ctx.editMessageText('How will I live in the future?');
   }
 }
 
