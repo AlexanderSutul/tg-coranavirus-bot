@@ -1,4 +1,4 @@
 export enum BotAction {
-    LikePandemic,
-    DislikePandemic,
+  LikePandemic,
+  DislikePandemic,
 }
