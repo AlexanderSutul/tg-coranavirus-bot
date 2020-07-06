@@ -20,7 +20,7 @@ class ActionDislikePandemic implements IAction {
 
 const actions: IAction[] = [
   new ActionLikePandemic(),
-  new ActionDislikePandemic(),
+  new ActionDislikePandemic()
 ];
 
 export const actionHandler = (bot: Telegraf<ContextMessageUpdate>) => {
