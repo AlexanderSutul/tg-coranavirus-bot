@@ -1,7 +1,7 @@
 import { Stat } from './stat';
 import { formatNumber } from "../helper/helper";
 
-type Report = string;
+export type Report = string;
 
 export class Statistics {
 
