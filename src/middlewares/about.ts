@@ -7,7 +7,7 @@ export const aboutMiddleware = async (ctx: ContextMessageUpdate) => {
   text += 'Subscribe to get new info.\n';
   text += `Current chat username: ${
     (ctx && ctx.from && ctx.from.username) || defaultUserName
-  }`;
+    }`;
   text += `\n`;
   await ctx.reply(text);
 };

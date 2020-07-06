@@ -5,7 +5,7 @@ export class Stat {
   private _death: number = 0;
   private _recovered: number = 0;
 
-  constructor() {}
+  constructor() { }
 
   setIdx(value: number) {
     this._idx = value;
