@@ -5,43 +5,43 @@ import { BotAction } from "../routes/actions/enums";
 import { Message } from "telegraf/typings/telegram-types";
 
 export const statisticsMiddleware = async (ctx: ContextMessageUpdate): Promise<Message | undefined> => {
-    const {
-        getTotalConfirmed,
-        getTotalDeath,
-        getTotalRecovered,
-        getStatisticsByCountries,
-    } = statisticService;
+  const {
+    getTotalConfirmed,
+    getTotalDeath,
+    getTotalRecovered,
+    getStatisticsByCountries,
+  } = statisticService;
 
-    const [
-        totalConfirmed, totalDeath, totalRecovered, statisticsByCountries
-    ] = await Promise.all([
-        getTotalConfirmed(), getTotalDeath(), getTotalRecovered(), getStatisticsByCountries()
-    ]);
+  const [
+    totalConfirmed, totalDeath, totalRecovered, statisticsByCountries
+  ] = await Promise.all([
+    getTotalConfirmed(), getTotalDeath(), getTotalRecovered(), getStatisticsByCountries()
+  ]);
 
-    const statistics = new Statistics(
-        statisticsByCountries, totalConfirmed, totalDeath, totalRecovered
-    );
+  const statistics = new Statistics(
+    statisticsByCountries, totalConfirmed, totalDeath, totalRecovered
+  );
 
-    const report = statistics.getReport();
+  const report = statistics.getReport();
 
-    const slicedReportParts = Statistics.useSlicer(report);
+  const slicedReportParts = Statistics.useSlicer(report);
 
-    for (const part of slicedReportParts) await ctx.reply(part, { parse_mode: 'HTML' });
+  for (const part of slicedReportParts) await ctx.reply(part, { parse_mode: 'HTML' });
 
-    const inlineMessageRatingKeyboard = Markup.inlineKeyboard([
-        Markup.callbackButton('👍', BotAction.LikePandemic.toString()),
-        Markup.callbackButton('👎', BotAction.DislikePandemic.toString())
-    ]).extra()
+  const inlineMessageRatingKeyboard = Markup.inlineKeyboard([
+    Markup.callbackButton('👍', BotAction.LikePandemic.toString()),
+    Markup.callbackButton('👎', BotAction.DislikePandemic.toString())
+  ]).extra()
 
-    const { from } = ctx;
+  const { from } = ctx;
 
-    if (!from) return;
+  if (!from) return;
 
-    const message = await ctx.telegram.sendMessage(
-        from.id,
-        `Hi ${from.username || 'anonymous'}. Do you like this pandemic statistic?`,
-        inlineMessageRatingKeyboard
-    );
+  const message = await ctx.telegram.sendMessage(
+    from.id,
+    `Hi ${from.username || 'anonymous'}. Do you like this pandemic statistic?`,
+    inlineMessageRatingKeyboard
+  );
 
-    return message;
+  return message;
 };

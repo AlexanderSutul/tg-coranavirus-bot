@@ -1,9 +1,13 @@
-import {ContextMessageUpdate, Extra, Markup} from "telegraf";
-import {standartMenu} from "../keyboard/menu";
+import { Message } from 'telegraf/typings/telegram-types';
+import { ContextMessageUpdate, Extra, Markup } from "telegraf";
+import { standartMenu } from "../keyboard/menu";
 
-export const startMiddleware = async (ctx: ContextMessageUpdate) => {
-    const buttons = standartMenu();
-    await ctx.reply(
-        'Hello! Please, press the button you need',
-        Extra.HTML().markup((m: Markup) => m.keyboard(buttons, {columns: 3, setResizeKeyboard: true})))
+export const startMiddleware = async (ctx: ContextMessageUpdate): Promise<Message> => {
+  const buttons = standartMenu();
+  const message = await ctx.reply(
+    'Hello! Please, press the button you need',
+    Extra.HTML().markup((m: Markup) => m.keyboard(buttons, { columns: 1, setResizeKeyboard: true }))
+  );
+
+  return message;
 };

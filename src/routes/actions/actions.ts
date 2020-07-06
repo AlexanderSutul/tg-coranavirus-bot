@@ -5,16 +5,16 @@ import { BotAction } from './enums';
 class ActionLikePandemic implements IAction {
   trigger: string = BotAction.LikePandemic.toString();
 
-  async middleware(ctx: ContextMessageUpdate): Promise<void> {
-    await ctx.editMessageText('🎉 I like this output! 🎉');
+  async middleware(ctx: ContextMessageUpdate): Promise<boolean> {
+    return await ctx.editMessageText('🎉 I like this output! 🎉');
   }
 }
 
 class ActionDislikePandemic implements IAction {
   trigger: string = BotAction.DislikePandemic.toString();
 
-  async middleware(ctx: ContextMessageUpdate): Promise<void> {
-    await ctx.editMessageText('How will I live in the future?');
+  async middleware(ctx: ContextMessageUpdate): Promise<boolean> {
+    return await ctx.editMessageText('How will I live in the future?');
   }
 }
 
