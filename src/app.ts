@@ -8,7 +8,7 @@ config();
 const token = process.env.TG_TOKEN;
 
 if (!token) {
-  throw new Error('There is no token');
+  throw new Error('There is no token, make sure TG_TOKEN has been passed to .env file.');
 }
 
 const bot = new Telegraf(token);
