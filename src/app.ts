@@ -5,13 +5,13 @@ import { actionHandler } from "./routes/actions/actions";
 
 config();
 
-const token = process.env.TG_TOKEN;
+const telegramToken = process.env.TG_TOKEN;
 
-if (!token) {
-  throw new Error('There is no token, make sure TG_TOKEN has been passed to .env file.');
+if (!telegramToken) {
+  throw new Error('There is no telegram token, make sure that param TG_TOKEN has been added to .env file.');
 }
 
-const bot = new Telegraf(token);
+const bot = new Telegraf(telegramToken);
 console.log('App runs...');
 try {
   (async () => {
