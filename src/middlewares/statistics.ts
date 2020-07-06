@@ -1,9 +1,10 @@
-import {ContextMessageUpdate, Markup} from "telegraf";
-import {statisticService} from "../services/statistic.service";
-import {Statistics} from "../models/statistics";
-import {BotAction} from "../routes/actions/actions";
+import { ContextMessageUpdate, Markup } from "telegraf";
+import { statisticService } from "../services/statistic.service";
+import { Statistics } from "../models/statistics";
+import { BotAction } from "../routes/actions/enums";
+import { Message } from "telegraf/typings/telegram-types";
 
-export const statisticsMiddleware = async (ctx: ContextMessageUpdate) => {
+export const statisticsMiddleware = async (ctx: ContextMessageUpdate): Promise<Message | undefined> => {
     const {
         getTotalConfirmed,
         getTotalDeath,
@@ -34,11 +35,13 @@ export const statisticsMiddleware = async (ctx: ContextMessageUpdate) => {
 
     const { from } = ctx;
 
-    if (from) {
-        await ctx.telegram.sendMessage(
-            from.id,
-            `Hi ${from.username || 'anonymous'}. Do you like this pandemic statistic?`,
-            inlineMessageRatingKeyboard
-        )
-    }
+    if (!from) return;
+
+    const message = await ctx.telegram.sendMessage(
+        from.id,
+        `Hi ${from.username || 'anonymous'}. Do you like this pandemic statistic?`,
+        inlineMessageRatingKeyboard
+    );
+
+    return message;
 };
