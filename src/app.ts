@@ -22,9 +22,13 @@ try {
 
     actionHandler(bot);
 
-    await bot.startPolling();
+    bot.startPolling();
     console.log('App launched');
   })();
 } catch (e) {
   console.log('Error is ', e);
+  bot.stop()
+    .then(() => {
+      console.log('Bot stopeed');
+    });
 }
