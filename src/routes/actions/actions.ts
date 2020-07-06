@@ -1,14 +1,6 @@
 import Telegraf, { ContextMessageUpdate } from 'telegraf';
-
-export enum BotAction {
-  LikePandemic,
-  DislikePandemic,
-}
-
-interface IAction {
-  trigger: string;
-  middleware(ctx: ContextMessageUpdate): void;
-}
+import { IAction } from './interfaces';
+import { BotAction } from './enums';
 
 class ActionLikePandemic implements IAction {
   trigger: string = BotAction.LikePandemic.toString();
