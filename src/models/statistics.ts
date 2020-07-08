@@ -1,7 +1,7 @@
 import { Stat } from './stat';
 import { formatNumber } from "../helper/helper";
 
-export type Report = string;
+export type Report = string | undefined;
 
 export class Statistics {
 
@@ -52,6 +52,7 @@ export class Statistics {
   }
 
   static useSlicer(report: Report, chunkSize: number = 50): string[] {
+    if (!report) return [];
     let slicedReport = [];
     let reportParts = '';
     const reportSlices = report.split('\n');

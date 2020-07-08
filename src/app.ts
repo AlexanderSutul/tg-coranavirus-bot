@@ -1,9 +1,9 @@
+import { ConfigService } from './services/config.service';
 import Telegraf from "telegraf";
 import { aboutMiddleware, chartMiddleware, startMiddleware, statisticsMiddleware } from "./middlewares/middlewares";
-import { config } from 'dotenv';
 import { actionHandler } from "./routes/actions/actions";
 
-config();
+ConfigService.configureApp();
 
 const telegramToken = process.env.TG_TOKEN;
 
