@@ -10,13 +10,13 @@ interface ISubscriber {
 }
 
 interface ISubject {
-  subs: Subscriber[];
+  subs: Map<number, Subscriber>;
   attach(sub: Subscriber): Subscriber;
-  detach(sub: Subscriber): Subscriber;
+  detach(sub: Subscriber): Map<number, Subscriber>;
   sendReports(report: Report): void;
 }
 
-class Subscriber implements ISubscriber {
+export class Subscriber implements ISubscriber {
   subscribed: boolean = false;
   ctx: ContextMessageUpdate;
 
@@ -45,23 +45,29 @@ class Subscriber implements ISubscriber {
 }
 
 class ReportSubject implements ISubject {
-  subs: Subscriber[] = [];
+  subs = new Map<number, Subscriber>();
 
   attach(sub: Subscriber): Subscriber {
-    this.subs.push(sub);
+    const subId = sub.ctx && sub.ctx.from && sub.ctx.from.id;
+    if (subId) this.subs.set(subId, sub);
     return sub;
   }
 
-  detach(sub: Subscriber): Subscriber {
+  detach(sub: Subscriber): Map<number, Subscriber> {
     const subId = sub.ctx && sub.ctx.from && sub.ctx.from.id;
-    this.subs = this.subs.filter(curSub => curSub.ctx.from?.id !== subId);
-    return sub;
+    if (subId) this.subs.delete(subId);
+    return this.subs;
   }
 
   sendReports(report: Report): void {
-    if (!this.subs.length) return;
-    for (const sub of this.subs) {
-      sub.sendReport(report);
-    }
+    if (!this.subs.size) return;
+    this.subs.forEach((_, key: number) => {
+      const sub = this.subs.get(key);
+      if (sub) {
+        sub.sendReport(report);
+      }
+    })
   }
 }
+
+export const subject = new ReportSubject();

@@ -53,8 +53,8 @@ export class Statistics {
 
   static useSlicer(report: Report, chunkSize: number = 50): string[] {
     if (!report) return [];
-    let slicedReport = [];
-    let reportParts = '';
+    let slicedReport: string[] = [];
+    let reportParts: string = '';
     const reportSlices = report.split('\n');
 
     for (let i = 0; i < reportSlices.length; i++) {

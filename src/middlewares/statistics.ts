@@ -1,3 +1,4 @@
+import { subject } from './../services/subscribe.service';
 import { ContextMessageUpdate, Markup } from "telegraf";
 import { statisticService } from "../services/statistic.service";
 import { Statistics } from "../models/statistics";
@@ -5,6 +6,9 @@ import { BotAction } from "../routes/actions/enums";
 import { Message } from "telegraf/typings/telegram-types";
 
 export const statisticsMiddleware = async (ctx: ContextMessageUpdate): Promise<Message | undefined> => {
+
+  console.log(`Subscribed: ${subject.subs.size}`);
+
   const {
     getTotalConfirmed,
     getTotalDeath,

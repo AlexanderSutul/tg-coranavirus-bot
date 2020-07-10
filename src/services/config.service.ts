@@ -22,5 +22,4 @@ export class ConfigService {
     config();
     console.log('Configuring done.');
   }
-
 }
