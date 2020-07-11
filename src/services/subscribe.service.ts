@@ -66,7 +66,7 @@ class ReportSubject implements ISubject {
       if (sub) {
         sub.sendReport(report);
       }
-    })
+    });
   }
 }
 
