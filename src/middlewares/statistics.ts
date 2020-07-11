@@ -35,7 +35,7 @@ export const statisticsMiddleware = async (ctx: ContextMessageUpdate): Promise<M
   const inlineMessageRatingKeyboard = Markup.inlineKeyboard([
     Markup.callbackButton('👍', BotAction.LikePandemic.toString()),
     Markup.callbackButton('👎', BotAction.DislikePandemic.toString())
-  ]).extra()
+  ]).extra();
 
   const { from } = ctx;
 
