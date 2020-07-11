@@ -36,7 +36,7 @@ export class Subscriber implements ISubscriber {
 
   async sendReport(report: Report) {
     if (!report) {
-      console.error('report is empty');
+      console.error('Are you sure that report was provided?');
       return;
     };
     await this.ctx.reply('You have subscription for COVID19 stats updates.');
