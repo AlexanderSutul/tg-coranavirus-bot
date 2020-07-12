@@ -8,7 +8,7 @@ export class TaskStatisticSubscription implements ITask {
   duration: number = 1000 * 60;
 
   task = async () => {
-    console.log(`Task ${this.name} invoked.`);
+    console.log(`Task ${this.name} was invoked.`);
 
     const {
       getTotalConfirmed,
@@ -29,14 +29,11 @@ export class TaskStatisticSubscription implements ITask {
 
     const report = statistics.getReport();
 
-    const message = 'Get by subscription: \n';
-
-    subject.sendReports(message + report?.slice(0, 500));
+    subject.sendReports(report);
   }
 
   run(): boolean {
-    const closureTask = this.task;
-    setInterval(closureTask, this.duration);
+    setInterval(this.task, this.duration);
     return true;
   }
 }

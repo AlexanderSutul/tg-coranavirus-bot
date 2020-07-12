@@ -1,5 +1,5 @@
 import { ContextMessageUpdate } from 'telegraf';
-import { Report } from './../models/statistics';
+import { Report, Statistics } from './../models/statistics';
 
 interface ISubscriber {
   subscribed: boolean;
@@ -40,7 +40,8 @@ export class Subscriber implements ISubscriber {
       return;
     };
     await this.ctx.reply('You have subscription for COVID19 stats updates.');
-    await this.ctx.reply(report);
+    const slicedReportParts = Statistics.useSlicer(report);
+    for (const part of slicedReportParts) await this.ctx.reply(part, { parse_mode: 'HTML' });
   }
 }
 
