@@ -16,6 +16,7 @@ if (!telegramToken) {
 
 const bot = new Telegraf(telegramToken);
 console.log('App runs...');
+
 try {
   (async () => {
     bot.start(startMiddleware);

@@ -4,11 +4,11 @@ import { Statistics } from '../models/statistics';
 import { statisticService } from "../services/statistic.service";
 
 export class TaskStatisticSubscription implements ITask {
-  name: string = 'task-stat-subscription';
+  taskName: string = 'task-stat-subscription';
   duration: number = 1000 * 60;
 
   task = async () => {
-    console.log(`Task ${this.name} was invoked.`);
+    console.log(`Task ${this.taskName} was invoked.`);
 
     const {
       getTotalConfirmed,

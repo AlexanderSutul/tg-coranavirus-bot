@@ -1,6 +1,6 @@
 import { TaskStatisticSubscription } from './task-stat-subscription';
 export interface ITask {
-  name: string;
+  taskName: string;
   duration: number;
   task(): void;
   run(): void;
@@ -17,7 +17,7 @@ export class TaskRunner implements ITaskRunner {
   runTasks(): boolean {
     try {
       for (const task of this.tasks) {
-        console.log(`Task ${task.name} with duration ${task.duration} run.`);
+        console.log(`Task ${task.taskName} with duration ${task.duration} run.`);
         task.run();
       }
       return true;

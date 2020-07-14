@@ -1,3 +1,4 @@
+import { IStatistics } from './statistic.service';
 import { ConfigService } from "./config.service";
 import axios from "axios";
 import { RequestsService } from "./requests.service";
@@ -48,14 +49,16 @@ export class StatisticService {
 export const statisticService = new StatisticService();
 
 export interface IStatistics {
-  attributes: {
-    OBJECTID: number;
-    Country_Region: string;
-    Last_Update: number;
-    Confirmed: number;
-    Deaths: number;
-    Recovered: number;
-  }
+  attributes: IStatisticAttributes;
+}
+
+interface IStatisticAttributes {
+  OBJECTID: number;
+  Country_Region: string;
+  Last_Update: number;
+  Confirmed: number;
+  Deaths: number;
+  Recovered: number;
 }
 
 export interface IStat {
