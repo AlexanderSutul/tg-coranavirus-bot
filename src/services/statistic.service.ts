@@ -1,4 +1,3 @@
-import { IStatistics } from './statistic.service';
 import { ConfigService } from "./config.service";
 import axios from "axios";
 import { RequestsService } from "./requests.service";
