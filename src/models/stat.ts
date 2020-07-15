@@ -7,27 +7,27 @@ export class Stat {
 
   constructor() { }
 
-  setIdx(value: number) {
+  setIdx(value: number = 0) {
     this._idx = value;
     return this;
   }
 
-  setRegion(value: string) {
+  setRegion(value: string = '') {
     this._region = value;
     return this;
   }
 
-  setConfirmed(value: number) {
+  setConfirmed(value: number = 0) {
     this._confirmed = value;
     return this;
   }
 
-  setDeath(value: number) {
+  setDeath(value: number = 0) {
     this._death = value;
     return this;
   }
 
-  setRecovered(value: number) {
+  setRecovered(value: number = 0) {
     this._recovered = value;
     return this;
   }
